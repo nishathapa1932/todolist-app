@@ -1,26 +1,23 @@
 import React from "react";
+import { connect } from "react-redux";
 
 class NewTodo extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          input: ""
-        };
-    }
-
-    handleChange(event) {
-        console.log(event)
-    }
-
     render() {
         return (
             <>
-                <form>
-                    <input type="text" value={this.state.input} placeholder="What needs to be done?" onChange={this.handleChange} />
+                <form className="form">
+                    <input type="text" defaultValue={this.props.title} placeholder="What needs to be done?" onBlur={this.props.addNewTodo} />
                 </form>
             </>
         )
     }
 }
 
-export default NewTodo
+const mapState = (state) => ({ title: state.newTitle })
+const mapAction = (dispatch) => {
+    return {
+        addNewTodo: () => dispatch({ type: 'NEW_TODO' })
+    }
+} 
+
+export default connect(mapState, mapAction)(NewTodo)

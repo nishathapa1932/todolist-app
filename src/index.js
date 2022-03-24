@@ -1,17 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { StrictMode } from "react";
+import ReactDom from "react-dom";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import App from "./App";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+const todoList = [
+  { id: 1, title: "Wash Clothes", completed: false },
+  { id: 2, title: "pay bills", completed: true },
+];
+
+const reducer = (state = { todos: todoList, newTitle: '' }, action) => {
+  switch(action.type) {
+    case 'NEW_TODO':
+      const newTodo = {
+        id: state.todos.length,
+        title: state.newTitle,
+        completed: false
+      }
+      return {...state, todos: [...state.todos, newTodo]}
+    default:
+      return state;
+  }
+};
+
+const store = createStore(reducer);
+
+const rootElement = document.getElementById("root");
+
+ReactDom.render(
+  <StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </StrictMode>,
+  rootElement
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

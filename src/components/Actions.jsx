@@ -1,7 +1,6 @@
 import React from "react";
 
-class Actions extends React.Component {
-    
+class Actions extends React.Component {    
     render() {
         return (
             <>
