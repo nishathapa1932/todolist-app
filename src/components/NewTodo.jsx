@@ -16,7 +16,7 @@ class NewTodo extends React.Component {
 const mapState = (state) => ({ title: state.newTitle })
 const mapAction = (dispatch) => {
     return {
-        addNewTodo: () => dispatch({ type: 'NEW_TODO' })
+        addNewTodo: (event) => dispatch({ type: 'NEW_TODO', payload: event.target.value })
     }
 } 
 

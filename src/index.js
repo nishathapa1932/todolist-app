@@ -9,12 +9,12 @@ const todoList = [
   { id: 2, title: "pay bills", completed: true },
 ];
 
-const reducer = (state = { todos: todoList, newTitle: '' }, action) => {
+const reducer = (state = { todos: todoList }, action) => {
   switch(action.type) {
     case 'NEW_TODO':
       const newTodo = {
-        id: state.todos.length,
-        title: state.newTitle,
+        id: state.todos.length + 1,
+        title: action.payload,
         completed: false
       }
       return {...state, todos: [...state.todos, newTodo]}

@@ -9,7 +9,7 @@ class Todos extends React.Component {
         <ul className="theList">
           {this.props.todos?.map((item, index) => (
             <li key={index}>
-              <input type="checkbox" checked={item.done} />
+              <input type="checkbox" checked={item.completed} />
               <span>{item.title}</span>
               <button className="btn">x</button>
             </li>
